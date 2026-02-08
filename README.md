@@ -2,7 +2,8 @@
 
 ## Overview
 This repository is a reproducible analysis project for the course assignment
-.
+**Modern Tools & Workflows for Data Quality**.
+
 
 Software and package versions are saved in output/session_info.txt.
 
@@ -31,11 +32,36 @@ A detailed description of the dataset and variables is available here:
 
 ---
 
-## How to run
+## How to Run
 
-### Windows (Git Bash)
+### 1. Environment / Versions
 
-From the project root folder:
+The software and package versions used in this project are saved automatically in:
+
+- `output/session_info.txt`
+
+This file is generated when you run the script below.
+
+---
+
+### 2. Run Locally (Windows / Git Bash)
+
+From the project root folder, execute:
 
 ```bash
 bash run.sh
+```
+This will generate reproducible outputs in:
+
+- `output/figures/`
+- `output/tables/`
+- `output/session_info.txt`
+
+---
+### 3. Run on Binder (Online)
+
+You can also run this project online using Binder:
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/anjuyamada/my-first-repo/HEAD)
+
+Just click the badge above to launch the environment in your browser.

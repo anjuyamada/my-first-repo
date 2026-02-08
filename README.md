@@ -2,15 +2,9 @@
 
 ## Overview
 This repository is a reproducible analysis project for the course assignment
-**Modern Tools & Workflows for Data Quality**.
+.
 
-It demonstrates a transparent workflow with:
-
-- Clear project structure
-- Version control (Git)
-- A runnable pipeline via `run.sh`
-- Reproducible environment information
-- Binder support
+Software and package versions are saved in output/session_info.txt.
 
 ---
 

@@ -36,13 +36,12 @@ p<-ggplot(df_long, aes(x = Date, y = Interest, color = Keyword)) +
   geom_point(size = 1.5) +
   
   
-  geom_vline(xintercept = as.numeric(key_dates),
+  geom_vline(xintercept = key_dates,
              linetype = "dashed", color = "gray40") +
-  
   
   scale_x_date(
     breaks = key_dates,
-    labels = format(key_dates, "%Y-%m")
+    labels = function(x) format(x, "%Y-%m")
   ) +
   
   

@@ -1,0 +1,106 @@
+---
+title: "Google Trends Analysis: Maternity Harassment Keywords"
+author: "Anju Yamada"
+format: html
+execute:
+  echo: true
+  warning: false
+---
+
+
+## Data
+
+The dataset was downloaded from **Google Trends** and contains monthly search
+interest values (0–100) for the following keywords:
+
+- Matahara (マタハラ)
+- Maternity Harassment (マタニティハラスメント)
+- Maternity・Harassment (マタニティ・ハラスメント)
+
+Time range: **January 2010 – September 2025**
+
+More details are available in:
+
+- `docs/codebook.md`
+
+---
+
+## Data Preparation
+
+```{r}
+library(tidyverse)
+
+# Create output folders
+dir.create("output", showWarnings = FALSE, recursive = TRUE)
+dir.create("output/figures", showWarnings = FALSE, recursive = TRUE)
+dir.create("output/tables", showWarnings = FALSE, recursive = TRUE)
+
+# Load data
+path <- file.path("data", "googletrend.csv")
+df <- read.csv(path, fileEncoding = "UTF-8-BOM", encoding = "UTF-8")
+
+# Rename columns for clarity
+df <- df %>%
+  rename(
+    `Matahara (マタハラ)` = `マタハラ`,
+    `Maternityharassment (マタニティハラスメント)` = `マタニティハラスメント`,
+    `Maternity Harassment (マタニティ・ハラスメント)` = `マタニティ.ハラスメント`
+  )
+
+# Convert Date column (monthly format)
+Sys.setlocale("LC_TIME", "C")
+df$Date <- as.Date(paste0(df$Date, "-01"), format = "%y-%b-%d")
+
+# Reshape into long format
+df_long <- df %>%
+  pivot_longer(
+    cols = -Date,
+    names_to = "Keyword",
+    values_to = "Interest"
+  )
+
+# Preview data
+head(df_long)
+```
+## Visualization
+```{r}
+p <- ggplot(df_long, aes(x = Date, y = Interest, color = Keyword)) +
+  geom_line(linewidth = 1) +
+  theme_minimal() +
+  labs(
+    title = "Google Trends Over Time",
+    x = "Date",
+    y = "Search Interest",
+    color = "Keyword"
+  )
+
+p
+```
+
+## Output
+```{r}
+# Save figure
+png(filename = file.path("output", "figures", "google_trends_over_time.png"),
+    width = 1200, height = 720)
+print(p)
+dev.off()
+
+# Save table
+write.csv(df_long,
+          file.path("output", "tables", "df_long.csv"),
+          row.names = FALSE)
+
+# List outputs (for verification in the report)
+list.files("output", recursive = TRUE)
+```
+
+## Reproducible pipeline
+```bash
+bash run.sh
+ls output
+```
+
+## Reproducibility notes
+```bash
+cat output/session_info.txt
+```

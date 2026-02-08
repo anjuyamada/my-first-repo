@@ -1,6 +1,8 @@
 
 library(tidyverse)
-if (!dir.exists("output")) dir.create("output")
+dir.create("output", showWarnings = FALSE, recursive = TRUE)
+dir.create("output/figures", showWarnings = FALSE, recursive = TRUE)
+dir.create("output/tables", showWarnings = FALSE, recursive = TRUE)
 path <- file.path("data", "googletrend.csv")
 df <- read.csv(path, fileEncoding = "UTF-8-BOM", encoding = "UTF-8")
 
@@ -61,14 +63,12 @@ p<-ggplot(df_long, aes(x = Date, y = Interest, color = Keyword)) +
   )
 message("Saving plot...")
 
-png(filename = file.path("output", "google_trends_over_time.png"),
+png(filename = file.path("output", "figures", "google_trends_over_time.png"),
     width = 1200, height = 720)
 print(p)
 dev.off()
 
-message("Saving session info...")
-writeLines(capture.output(sessionInfo()),
-           file.path("output", "sessionInfo.txt"))
+message("Saving table...")
+write.csv(df_long, file.path("output", "tables", "df_long.csv"), row.names = FALSE)
 
-message("Done saving.")
-
+message("Done.")

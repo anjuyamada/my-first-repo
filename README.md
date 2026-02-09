@@ -23,7 +23,9 @@ Software and package versions are saved in output/session_info.txt.
 ## Data
 
 - File: `data/googletrend.csv`
-- Source: Google Trends export (downloaded manually)
+- Source: Google Trends export (https://trends.google.com), accessed February 2026
+- Keywords: "マタハラ", "マタニティハラスメント", "マタニティ・ハラスメント"
+- Time range: January 2010 – September 2025
 - Note: The data contains no personal information.
 
 A detailed description of the dataset and variables is available here:

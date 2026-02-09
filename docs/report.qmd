@@ -97,7 +97,7 @@ list.files("output", recursive = TRUE)
 ## Reproducible pipeline
 ```bash
 bash run.sh
-ls output
+ls -la output
 ```
 
 ## Reproducibility notes

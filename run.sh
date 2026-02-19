@@ -16,4 +16,7 @@ fi
 # 1) analysis
 "$RSCRIPT" code/01_analysis.R
 
+# 2) Quarto
+quarto render docs/report.qmd
+
 echo "Done."

@@ -1,7 +1,9 @@
 ---
 title: "Google Trends Analysis: Maternity Harassment Keywords"
 author: "Anju Yamada"
-format: html
+format: 
+  html:
+    embed-resources: true
 execute:
   echo: true
   warning: false
@@ -29,14 +31,15 @@ More details are available in:
 
 ```{r}
 library(tidyverse)
+library(here)
 
 # Create output folders
-dir.create("output", showWarnings = FALSE, recursive = TRUE)
-dir.create("output/figures", showWarnings = FALSE, recursive = TRUE)
-dir.create("output/tables", showWarnings = FALSE, recursive = TRUE)
+dir.create(here("output"), showWarnings = FALSE, recursive = TRUE)
+dir.create(here("output/figures"), showWarnings = FALSE, recursive = TRUE)
+dir.create(here("output/tables"), showWarnings = FALSE, recursive = TRUE)
 
 # Load data
-path <- file.path("data", "googletrend.csv")
+path <- here("data", "googletrend.csv")
 df <- read.csv(path, fileEncoding = "UTF-8-BOM", encoding = "UTF-8")
 
 # Rename columns for clarity
@@ -80,18 +83,18 @@ p
 ## Output
 ```{r}
 # Save figure
-png(filename = file.path("output", "figures", "google_trends_over_time.png"),
+png(filename = here("output", "figures", "google_trends_over_time.png"),
     width = 1200, height = 720)
 print(p)
 dev.off()
 
 # Save table
 write.csv(df_long,
-          file.path("output", "tables", "df_long.csv"),
+          here("output", "tables", "df_long.csv"),
           row.names = FALSE)
 
 # List outputs (for verification in the report)
-list.files("output", recursive = TRUE)
+list.files(here("output"), recursive = TRUE)
 ```
 
 ## Reproducible pipeline
